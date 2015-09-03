@@ -24,9 +24,11 @@ gem 'configatron'
 gem 'pry'
 gem 'rest-client'
 gem 'mail'
+gem 'mandrill-api'
 
 gem 'gmail-britta', :git => 'git://github.com/bkrausz/gmail-britta.git', :ref => 'ced6355443fe2b99f6414b2da096c70a38b23f98'
 
 group :development, :test do
   gem 'mocha'
+  gem 'rerun'
 end
