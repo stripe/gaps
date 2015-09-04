@@ -4,9 +4,7 @@ db:
   # URL to connect to your MongoDB instance (where all state is
   # persisted). Note that Gaps stores some interesting state, such as
   # people's filter configuration and group categorization.
-  # Set the host to gaps-mongo by default as that's how the 
-  # docker-runner script is configured
-  mongodb_url: mongodb://gaps-mongo:27017
+  mongodb_url: mongodb://localhost:27017
 
 # Your favicon
 favicon:
