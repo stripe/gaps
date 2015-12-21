@@ -17,7 +17,10 @@ module Gaps
       end
 
       MongoMapper.database = configatron.db.database
-      MongoMapper.connection = Mongo::MongoClient.from_uri(configatron.db.mongodb_url, pool_size: 5)
+      MongoMapper.connection = Mongo::MongoClient.from_uri(
+        configatron.db.mongodb_url,
+        pool_size: [configatron.cache.pool_size, 5].max
+      )
 
       Cache.build_index
       Group.build_index
