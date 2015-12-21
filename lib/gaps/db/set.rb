@@ -1,5 +1,5 @@
 module Gaps::DB
-  class Set < Base
+  class GroupSet < Base
     set_collection_name 'set'
 
     key :name, String
