@@ -6,6 +6,16 @@ module Gaps
     class UniqueKeyViolation < DBError; end
 
     def self.init
+      # Initialize even if we're not encrypting, since we may need to
+      # unencrypt some records.
+      if configatron.db.key?(:encryption_key)
+        SymmetricEncryption.cipher = SymmetricEncryption::Cipher.new(
+          cipher_name: 'aes-128-cbc',
+          key: configatron.db.encryption_key,
+          encoding: :base64strict
+        )
+      end
+
       MongoMapper.database = configatron.db.database
       MongoMapper.connection = Mongo::MongoClient.from_uri(configatron.db.mongodb_url, pool_size: 5)
 

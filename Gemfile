@@ -17,6 +17,7 @@ gem 'bson_ext'
 gem 'einhorn'
 gem 'chalk-log'
 gem 'chalk-config'
+gem 'symmetric-encryption'
 
 gem 'rake'
 

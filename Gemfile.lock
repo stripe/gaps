@@ -34,7 +34,11 @@ GEM
       logging
       lspace
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     configatron (4.4.1)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     einhorn (0.6.3)
     erubis (2.7.0)
     extlib (0.9.16)
@@ -110,6 +114,8 @@ GEM
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
     slop (3.6.0)
+    symmetric-encryption (3.8.2)
+      coercible (~> 1.0)
     thread (0.1.4)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -139,4 +145,5 @@ DEPENDENCIES
   rake
   rest-client
   sinatra
+  symmetric-encryption
   thread

@@ -81,7 +81,19 @@ configuration file. Clone this repository and execute
 `bin/docker-runner` to run the Docker image we've published with your
 `site.yaml` bind-mounted inside.
 
-# Permissions
+# Security
+
+The Gaps application runs with the minimal privileges it can. However,
+it needs to perform powerful actions such as viewing all lists and
+subscribing a user to any list. You should restrict access to Gaps
+appropriately.
+
+Please be aware that Gaps stores its OAuth credentials in its backing
+database. You can enable encryption of those credentials via the
+`encrypt_oauth_credentials` configuration option (and also providing a
+value for `db.encryption_key`).
+
+## Permissions
 
 Gaps uses your domain admin's credentials to perform most actions
 (listing all groups, joining a group). So permissions are entrusted to

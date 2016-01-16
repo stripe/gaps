@@ -1,4 +1,5 @@
 require 'thread'
+require 'symmetric-encryption'
 
 module Gaps::DB
   class User < Base
@@ -13,8 +14,10 @@ module Gaps::DB
     key :admin, Boolean, default: false
     key :image_url, String
 
-    key :refresh_token, String
-    key :access_token, String
+    key :refresh_token, String # plaintext, thus deprecated
+    key :access_token, String # plaintext, thus deprecated
+    key :encrypted_refresh_token, String
+    key :encrypted_access_token, String
     key :expires_in, Integer
     key :issued_at, Integer
 
@@ -25,6 +28,73 @@ module Gaps::DB
     key :filters, Hash, :default => {}
 
     key :sets, Array, :default => []
+
+    ### Secrets
+
+    def initialize_from_database(*args)
+      ret = super
+
+      # Migrate back and forth between encrypted credentials at load time
+      if configatron.encrypt_oauth_credentials && (@access_token || @refresh_token)
+        self.encrypted_access_token = encrypt(@access_token)
+        self.encrypted_refresh_token = encrypt(@refresh_token)
+        @access_token = nil
+        @refresh_token = nil
+        save!
+      elsif !configatron.encrypt_oauth_credentials && (@encrypted_access_token || @encrypted_refresh_token)
+        self.access_token = decrypt(@encrypted_access_token)
+        self.refresh_token = decrypt(@encrypted_refresh_token)
+        @encrypted_access_token = nil
+        @encrypted_refresh_token = nil
+        save!
+      end
+
+      ret
+    end
+
+    def encrypt(str)
+      # Use random iv and compress
+      SymmetricEncryption.encrypt(str, true, true)
+    end
+
+    def decrypt(str)
+      SymmetricEncryption.decrypt(str)
+    end
+
+    def access_token
+      if configatron.encrypt_oauth_credentials
+        decrypt(self.encrypted_access_token)
+      else
+        super
+      end
+    end
+
+    def access_token=(tok)
+      if configatron.encrypt_oauth_credentials
+        self.encrypted_access_token = encrypt(tok)
+      else
+        super
+      end
+    end
+
+    def refresh_token
+      if configatron.encrypt_oauth_credentials
+        decrypt(self.encrypted_refresh_token)
+      else
+        super
+      end
+    end
+
+    def refresh_token=(tok)
+      if configatron.encrypt_oauth_credentials
+        self.encrypted_refresh_token = encrypt(tok)
+      else
+        super
+      end
+    end
+
+
+    ### End secrets
 
     def self.build_index
       self.ensure_index([[:google_id, 1]], unique: true, sparse: true)
