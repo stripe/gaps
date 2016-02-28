@@ -23,6 +23,11 @@
       "required": true,
       "description": "A secret key for sessions.",
       "generator": "secret"
+    },
+    "DB_ENCRYPTION_KEY": {
+      "required": false,
+      "description": "Secret key to encrypt your OAuth credentials at rest",
+      "generator": "secret"
     }
   }
 }

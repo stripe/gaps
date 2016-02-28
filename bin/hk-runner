@@ -16,9 +16,12 @@ arr=(${MONGODB_URL//\// })
 MONGODB_DATABASE=${arr[2]}
 
 cat <<EOF > site.yaml
+encrypt_oauth_credentials: true
+
 db:
   database: $MONGODB_DATABASE
   mongodb_url: $MONGODB_URL
+  encryption_key: $DB_ENCRYPTION_KEY
 
 favicon: $FAVICON_URL
 
