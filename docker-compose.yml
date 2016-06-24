@@ -1,0 +1,12 @@
+web:
+  image: stripeoss/gaps
+  links:
+    - mongo
+  ports:
+    - "3500:3500"
+  volumes:
+    - ./site.yaml:/gaps/site.yaml:ro
+  environment:
+    - RACK_ENV=production
+mongo:
+  image: mongo
