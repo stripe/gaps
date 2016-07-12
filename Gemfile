@@ -13,10 +13,13 @@ gem 'rack_csrf'
 gem 'erubis'
 gem 'sinatra'
 gem 'mongo_mapper'
+# Needed for MongoLab which requires SCRAM-SHA-1
+gem 'mongo', '~> 1.12'
 gem 'bson_ext'
 gem 'einhorn'
 gem 'chalk-log'
 gem 'chalk-config'
+gem 'symmetric-encryption'
 
 gem 'rake'
 

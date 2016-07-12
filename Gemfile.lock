@@ -23,9 +23,9 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
-    bson (1.11.1)
-    bson_ext (1.11.1)
-      bson (~> 1.11.1)
+    bson (1.12.5)
+    bson_ext (1.12.5)
+      bson (~> 1.12.5)
     builder (3.2.2)
     chalk-config (0.2.1)
       configatron (~> 4.4)
@@ -34,7 +34,11 @@ GEM
       logging
       lspace
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     configatron (4.4.1)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     einhorn (0.6.3)
     erubis (2.7.0)
     extlib (0.9.16)
@@ -70,8 +74,8 @@ GEM
     minitest (5.4.3)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
-    mongo (1.11.1)
-      bson (= 1.11.1)
+    mongo (1.12.5)
+      bson (= 1.12.5)
     mongo_mapper (0.13.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0)
@@ -110,6 +114,8 @@ GEM
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
     slop (3.6.0)
+    symmetric-encryption (3.8.2)
+      coercible (~> 1.0)
     thread (0.1.4)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -131,6 +137,7 @@ DEPENDENCIES
   google-api-client
   mail
   mocha
+  mongo (~> 1.12)
   mongo_mapper
   pry
   puma
@@ -139,4 +146,8 @@ DEPENDENCIES
   rake
   rest-client
   sinatra
+  symmetric-encryption
   thread
+
+BUNDLED WITH
+   1.11.2

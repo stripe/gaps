@@ -1,4 +1,9 @@
 default: &default
+  # We disable this by default for now. People need to generate their
+  # own encryption key (under `db.encryption_key`) for it to be
+  # useful.
+  encrypt_oauth_credentials: false
+
   cache:
     # How large of a threadpool to maintain for populating the cache
     # of what each list is subscribed to. (Note for implementation
@@ -41,7 +46,7 @@ default: &default
       gaps_scheme: true
       # Whether to use the Google Groups Settings API to decide if a
       # list is private. (Can be composed with the Gaps scheme.)
-      api_scheme: false
+      api_scheme: true
 
   # Whether to fetch the Google Groups settings upon group
   # refresh. Needed to make the api_scheme work. In the future will

@@ -5,6 +5,8 @@ db:
   # persisted). Note that Gaps stores some interesting state, such as
   # people's filter configuration and group categorization.
   mongodb_url: mongodb://localhost:27017
+  # Set this to a random string, such as `openssl rand -base64 129`
+  encryption_key: "FN25NUJ6pk1Ys53aVHJp7usl1Dnz18QHy7+7FQH3R/QXd5XC9Syh5Dx+tsvD2o4OWylHqw9sgPQUU472B5RZXkx27Wo2rw0nlhXsYFWAVRpRz8jZ7Egzl4K0t4c0m/Gzy8QuMRbDCEktJq41S78J5KJYopTJ1oNKPlxjAKj7mFCl"
 
 # Your favicon
 favicon:

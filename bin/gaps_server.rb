@@ -272,14 +272,14 @@ module Gaps
     ## Suggested Sets
 
     get '/sets', auth: true do
-      @sets = Gaps::DB::Set.find_each
+      @sets = Gaps::DB::GroupSet.find_each
       erb :sets
     end
 
     post '/sets', auth: true do
       set_id = params[:set]
       log.info('Adding user to subscription set', set: set_id, user: @user.email)
-      Gaps::DB::Set.find(set_id).groups_.each do |group|
+      Gaps::DB::GroupSet.find(set_id).groups_.each do |group|
         membership = @user.group_member?(group)
         through_list = @user.group_member_through_list(group)
         direct_membership = membership && !through_list
@@ -300,7 +300,7 @@ module Gaps
 
     get '/sets/:id', auth: true do
       if params[:id] != 'new'
-        @set = Gaps::DB::Set.find(params[:id])
+        @set = Gaps::DB::GroupSet.find(params[:id])
         return not_found unless @set
       end
       @groups = Gaps::DB::Group.categorized(@user)
@@ -315,9 +315,9 @@ module Gaps
       }
 
       if params[:id] == 'new'
-        Gaps::DB::Set.new(args).save
+        Gaps::DB::GroupSet.new(args).save
       else
-        set = Gaps::DB::Set.find(params[:id])
+        set = Gaps::DB::GroupSet.find(params[:id])
         return not_found unless set
 
         old_groups = set.groups
