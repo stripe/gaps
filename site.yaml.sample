@@ -21,10 +21,14 @@ info:
 notify:
   # Whether to send an email notifying people when a new list is
   # created. If disabled, will instead just print the email to the
-  # console. (Note you must have a functioning sendmail setup for this
-  # to work; a TODO is to integrate with an email provider like
-  # Mailgun.)
+  # console. 
+  # Can use sendmail or Mandrill to send emails
   send_email: false
+  # Default provider
+  provider: sendmail
+  # Mandrill - need to include and API key
+  #provider: mandrill
+  #api_key: xxxxxxxx
   # What email address to notify.
   to: all-bots@example.com
   # What email address to send from. In Stripe's email transparency
